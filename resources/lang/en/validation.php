@@ -138,6 +138,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'name'=>[
+            'required'=>'名称不能为空啊大哥'
+        ]
     ],
 
     /*
