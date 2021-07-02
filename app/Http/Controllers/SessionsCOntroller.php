@@ -14,7 +14,7 @@ class SessionsCOntroller extends Controller
             'email'=>'required|email|min:6',
             'password'=>'required',
         ]);
-        if(Auth::attempt($param)){
+        if(Auth::attempt($param,$request->has('remember'))){
             session()->flash('success','登录成功');
             return redirect()->route('users.show',[Auth::user()]);
             echo 'ok';
