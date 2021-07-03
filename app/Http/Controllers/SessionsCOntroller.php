@@ -22,10 +22,18 @@ class SessionsCOntroller extends Controller
             'password'=>'required',
         ]);
         if(Auth::attempt($param,$request->has('remember'))){
-            session()->flash('success','登录成功');
-            $fallback=route('users.show',[Auth::user()]);
-            //dd($fallback);
-            return redirect()->intended($fallback);
+            if(Auth::user()->activated){
+                session()->flash('success','登录成功');
+                $fallback=route('users.show',[Auth::user()]);
+                //dd($fallback);
+                return redirect()->intended($fallback);
+            }else{
+                Auth::logout();
+                session()->flash('warning','未激活');
+                //dd($fallback);
+                return redirect()->route('login');
+            }
+
         }else{
             session()->flash('danger','对不起,登录失败');
             return redirect()->back()->withInput();
