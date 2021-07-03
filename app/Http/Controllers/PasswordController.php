@@ -12,6 +12,13 @@ use Mail;
 
 class PasswordController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('throttle:3,10',[
+            'only'=>['showLinkRequestForm']
+        ]);
+    }
+
     public function showLinkRequestForm(){
         //dd(new Carbon());
         return view('passwords.email');
