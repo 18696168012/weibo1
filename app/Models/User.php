@@ -51,4 +51,7 @@ class User extends Authenticatable
         $path = public_path();
         return '/image/tx.jpg';
     }
+    public function statuses(){
+        return $this->hasMany(Status::class);
+    }
 }
