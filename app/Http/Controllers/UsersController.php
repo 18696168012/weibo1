@@ -67,4 +67,11 @@ class UsersController extends Controller
             return redirect()->back()->withInput();
         }
     }
+    public function destroy(User $user){
+        $this->authorize('destroy',$user);
+        $user->delete();
+        session()->flash('success','删除成功');
+        //return redirect()->route('users.index');
+        return back();
+    }
 }
