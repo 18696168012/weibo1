@@ -19,7 +19,8 @@ class StatusesController extends Controller
         Auth::user()->statuses()->create([
             'content'=>$request['content'],
         ]);
-        session()->flush('success','创建成功');
+        //dd(Auth::check());
+        session()->flash('success','创建成功');
         return redirect()->back();
     }
 }
