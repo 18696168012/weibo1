@@ -26,7 +26,7 @@ class UsersController extends Controller
     }
     public function show(User $user){
         $statuses=$user->statuses()->orderBy('created_at','desc')->paginate(10);
-        //dd($statuses);
+        //dd($statuses->count());
         return view('users.show',compact('user','statuses'));
     }
     public function store(Request $request){
