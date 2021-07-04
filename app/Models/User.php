@@ -81,6 +81,6 @@ class User extends Authenticatable
     }
     //判断当前人是否关注了另一个人
     public function isFollowing($user_id){
-        return $this->followings()->contains($user_id);
+        return $this->followings->contains($user_id);
     }
 }
