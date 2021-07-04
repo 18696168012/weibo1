@@ -13,7 +13,7 @@ class FollowersController extends Controller
         $this->middleware('auth');
     }
     public function store(User $user){
-        //dd(123);
+        //dd($user->id);
         $this->authorize('follow',$user);
         if(!Auth::user()->isFollowing($user->id)){
             Auth::user()->follow($user->id);

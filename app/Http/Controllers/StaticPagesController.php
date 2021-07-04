@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class StaticPagesController extends Controller
 {
     public function home(){
+        //dd(Auth::user()->feed());
         $feed_items=[];
         if(Auth::check()){
             $feed_items=Auth::user()->feed()->paginate(5);

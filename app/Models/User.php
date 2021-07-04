@@ -55,7 +55,9 @@ class User extends Authenticatable
         return $this->hasMany(Status::class);
     }
     public function feed(){
-        return $this->statuses()->orderBy('created_at','desc');
+        $user_ids=$this->followings()->pluck('users.id')->toArray();
+        array_push($user_ids,$this->id);
+        return Status::whereIn('user_id',$user_ids)->with('user')->orderBy('created_at','desc');
     }
     //获取粉丝列表
     public function followers(){
@@ -70,7 +72,7 @@ class User extends Authenticatable
         if(!is_array($user_ids)){
             $user_ids=compact('user_ids');
         }
-        $this->followings()->sync($user_ids);
+        $this->followings()->sync($user_ids,false);
     }
     //取关
     public function unfollow($user_ids){
